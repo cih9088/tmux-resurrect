@@ -155,12 +155,12 @@ new_pane() {
 	local pane_id="${session_name}:${window_number}.${pane_index}"
 	if is_restoring_pane_contents && pane_contents_file_exists "$pane_id"; then
 		local pane_creation_command="$(pane_creation_command "$session_name" "$window_number" "$pane_index")"
-		tmux split-window -t "${session_name}:${window_number}" -c "$dir" "$pane_creation_command"
+		tmux split-window -h -t "${session_name}:${window_number}" -c "$dir" "$pane_creation_command"
 	else
-		tmux split-window -t "${session_name}:${window_number}" -c "$dir"
+		tmux split-window -h -t "${session_name}:${window_number}" -c "$dir"
 	fi
 	# minimize window so more panes can fit
-	tmux resize-pane  -t "${session_name}:${window_number}" -U "999"
+	tmux resize-pane  -t "${session_name}:${window_number}" -L "999"
 }
 
 restore_pane() {
